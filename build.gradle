@@ -1,13 +1,16 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.31'
+}
+
 apply plugin: 'kotlin'
 apply plugin: 'application'
-
-mainClassName = 'io.vertx.core.Launcher'
 
 repositories {
     mavenCentral()
 }
+
 dependencies {
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: "$kotlin_version"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib'
     compile group: 'io.vertx', name: 'vertx-lang-kotlin', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-lang-kotlin-coroutines', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-web', version: '3.5.1'
@@ -16,17 +19,8 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.21'
 }
 
+mainClassName = 'io.vertx.core.Launcher'
 def mainVerticleName = 'com.tg17.App'
-
-buildscript {
-    ext.kotlin_version = '1.2.31'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
 
 compileKotlin {
     kotlinOptions {
