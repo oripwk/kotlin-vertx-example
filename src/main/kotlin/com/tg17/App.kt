@@ -12,8 +12,7 @@ import io.vertx.kotlin.coroutines.dispatcher
 
 
 class App : CoroutineVerticle() {
-    override suspend fun start()
-    {
+    override suspend fun start() {
         Json.mapper.registerModule(KotlinModule())
 
         val router = Router.router(vertx)

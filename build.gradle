@@ -24,6 +24,7 @@ dependencies {
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4' // TODO remove
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.21'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.305'
 }
 
 mainClassName = 'io.vertx.core.Launcher'
