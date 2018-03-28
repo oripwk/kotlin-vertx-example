@@ -1,29 +1,19 @@
 package com.tg17.routes
 
-import com.tg17.controllers.Controller
-import io.vertx.ext.web.Route
+import com.tg17.controllers.UserController
+import com.tg17.extentions.Route.coroutineHandler
 import io.vertx.ext.web.Router
-import io.vertx.ext.web.RoutingContext
-import io.vertx.kotlin.coroutines.dispatcher
-import kotlinx.coroutines.experimental.launch
+import io.vertx.ext.web.handler.BodyHandler
 
-class Router constructor(private val controller: Controller, router: Router) {
+class Router constructor(controller: UserController, router: Router) {
 
     init {
-        router.get("/movie/:id").coroutineHandler { controller.getMovie(it) }
-        router.post("/rateMovie/:id").coroutineHandler { controller.rateMovie(it) }
-        router.get("/getRating/:id").coroutineHandler { controller.getRating(it) }
-    }
-}
+        router.route().handler(BodyHandler.create())
 
-fun Route.coroutineHandler(fn: suspend (RoutingContext) -> Unit): Route {
-    return handler { ctx ->
-        launch(ctx.vertx().dispatcher()) {
-            try {
-                fn(ctx)
-            } catch (e: Exception) {
-                ctx.fail(e)
-            }
-        }
+        router.post("/user").coroutineHandler { controller.create(it) }
+        router.post("/user").coroutineHandler { controller.updateById(it) }
+        router.get("/user").coroutineHandler { controller.getAll(it) }
+        router.get("/user/:id").coroutineHandler { controller.getById(it) }
+        router.delete("/user/:id").coroutineHandler { controller.deleteById(it) }
     }
 }

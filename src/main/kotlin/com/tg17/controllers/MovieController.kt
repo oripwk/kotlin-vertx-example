@@ -11,7 +11,7 @@ import io.vertx.kotlin.core.json.json
 import io.vertx.kotlin.core.json.obj
 import io.vertx.kotlin.coroutines.awaitResult
 
-class Controller constructor(private val client: JDBCClient)  {
+class MovieController constructor(private val client: JDBCClient)  {
 
     suspend fun getMovie(ctx: RoutingContext) {
         val id = ctx.pathParam("id")
