@@ -1,12 +1,12 @@
-package com.tg17.controllers
+package com.oripwk.controllers
 
 import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
 import com.amazonaws.services.sqs.model.SendMessageRequest
 import com.amazonaws.services.sqs.model.SendMessageResult
-import com.tg17.awaitResult
-import com.tg17.client.AlbumClient
-import com.tg17.model.User
-import com.tg17.service.UserService
+import com.oripwk.awaitResult
+import com.oripwk.client.AlbumClient
+import com.oripwk.model.User
+import com.oripwk.service.UserService
 import io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE
 import io.netty.handler.codec.http.HttpHeaderValues.APPLICATION_JSON
 import io.vertx.core.json.JsonObject

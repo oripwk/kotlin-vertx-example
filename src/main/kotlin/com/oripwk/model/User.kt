@@ -1,4 +1,4 @@
-package com.tg17.model
+package com.oripwk.model
 
 data class User(
         val id: Int,

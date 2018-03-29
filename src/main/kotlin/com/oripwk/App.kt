@@ -1,9 +1,9 @@
-package com.tg17
+package com.oripwk
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.tg17.client.AlbumClient
-import com.tg17.controllers.UserController
-import com.tg17.service.UserService
+import com.oripwk.client.AlbumClient
+import com.oripwk.controllers.UserController
+import com.oripwk.service.UserService
 import io.vertx.config.ConfigRetriever
 import io.vertx.config.ConfigRetrieverOptions
 import io.vertx.config.ConfigStoreOptions
@@ -35,7 +35,7 @@ class App : CoroutineVerticle() {
         val userService = UserService(vertx, config.getJsonObject("db").getJsonObject("sql"))
         val albumClient = AlbumClient(ws, config.getJsonObject("albums"))
         val controller = UserController(userService, albumClient, config.getJsonObject("sqs"))
-        com.tg17.routes.Router(controller, router)
+        com.oripwk.routes.Router(controller, router)
 
         awaitResult<HttpServer> {
             vertx.createHttpServer()

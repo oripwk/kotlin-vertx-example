@@ -29,7 +29,7 @@ dependencies {
 }
 
 mainClassName = 'io.vertx.core.Launcher'
-def mainVerticleName = 'com.tg17.App'
+def mainVerticleName = 'com.oripwk.App'
 
 compileKotlin {
     kotlinOptions {

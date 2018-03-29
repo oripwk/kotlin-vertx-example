@@ -1,7 +1,7 @@
-package com.tg17.routes
+package com.oripwk.routes
 
-import com.tg17.controllers.UserController
-import com.tg17.extentions.Route.coroutineHandler
+import com.oripwk.controllers.UserController
+import com.oripwk.extentions.Route.coroutineHandler
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 

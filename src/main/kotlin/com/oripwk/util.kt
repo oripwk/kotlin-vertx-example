@@ -1,4 +1,4 @@
-package com.tg17
+package com.oripwk
 
 import com.amazonaws.AmazonWebServiceRequest
 import com.amazonaws.handlers.AsyncHandler

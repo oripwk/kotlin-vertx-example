@@ -1,6 +1,6 @@
-package com.tg17.dal
+package com.oripwk.dal
 
-import com.tg17.model.User
+import com.oripwk.model.User
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.statements.UpdateBuilder

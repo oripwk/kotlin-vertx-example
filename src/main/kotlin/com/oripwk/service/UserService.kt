@@ -1,8 +1,8 @@
-package com.tg17.service
+package com.oripwk.service
 
-import com.tg17.dal.Users
-import com.tg17.execBlocking
-import com.tg17.model.User
+import com.oripwk.dal.Users
+import com.oripwk.execBlocking
+import com.oripwk.model.User
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
 import org.jetbrains.exposed.sql.*

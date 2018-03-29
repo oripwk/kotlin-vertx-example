@@ -1,4 +1,4 @@
-package com.tg17.client
+package com.oripwk.client
 
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.json.JsonObject
