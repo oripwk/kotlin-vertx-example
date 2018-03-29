@@ -13,6 +13,7 @@ import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.core.json.Json
 import io.vertx.kotlin.core.json.array
+import mu.KLogging
 
 class UserController(
         private val userService: UserService,
@@ -20,9 +21,12 @@ class UserController(
         private val queueUrl: String
 ) {
 
+    companion object : KLogging()
+
     private val sqs = AmazonSQSAsyncClientBuilder.standard().build()
 
     suspend fun create(ctx: RoutingContext) {
+        logger.info { "creating user" }
         val userJson = ctx.bodyAsJson
         val user = userJson.mapTo(User::class.java)
         awaitResult<SendMessageRequest, SendMessageResult> { sqs.sendMessageAsync(queueUrl, userJson.encode(), it) }
@@ -31,6 +35,7 @@ class UserController(
     }
 
     suspend fun updateById(ctx: RoutingContext) {
+        logger.info { "updating user" }
         val id = ctx.request().getParam("id").toInt()
         val user = ctx.bodyAsJson.mapTo(User::class.java)
         userService.updateById(user, id)
@@ -38,6 +43,7 @@ class UserController(
     }
 
     suspend fun getById(ctx: RoutingContext) {
+        logger.info { "getting user" }
         val id = ctx.request().getParam("id").toInt()
         val user = userService.getById(id)
         val albumTitle = albumClient.getFirstAlbum(1).getString("title")
@@ -49,12 +55,14 @@ class UserController(
     }
 
     suspend fun deleteById(ctx: RoutingContext) {
+        logger.info { "deleting user" }
         val id = ctx.request().getParam("id").toInt()
         userService.deleteById(id)
         ctx.response().end()
     }
 
     suspend fun getAll(ctx: RoutingContext) {
+        logger.info { "getting all users" }
         val users = userService.getAll()
         val jsons = Json.array(users.map(JsonObject::mapFrom))
         ctx.response()

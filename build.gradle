@@ -22,8 +22,10 @@ dependencies {
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.4.1'
     compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
-    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.21'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.0'
     compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.305'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.4'
+    compile group: 'io.github.microutils', name: 'kotlin-logging', version: '1.5.4'
 }
 
 mainClassName = 'io.vertx.core.Launcher'
