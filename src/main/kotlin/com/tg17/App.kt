@@ -16,7 +16,7 @@ class App : CoroutineVerticle() {
         Json.mapper.registerModule(KotlinModule())
 
         val router = Router.router(vertx)
-        val userService = UserService(vertx.dispatcher())
+        val userService = UserService(vertx)
         val controller = UserController(userService)
         com.tg17.routes.Router(controller, router)
 

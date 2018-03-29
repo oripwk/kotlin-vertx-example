@@ -5,7 +5,7 @@ import com.tg17.extentions.Route.coroutineHandler
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 
-class Router constructor(controller: UserController, router: Router) {
+class Router(controller: UserController, router: Router) {
 
     init {
         router.route().handler(BodyHandler.create())

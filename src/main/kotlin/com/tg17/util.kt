@@ -1,21 +1,18 @@
 package com.tg17
 
-import io.vertx.core.AsyncResult
+import io.vertx.core.Future
 import io.vertx.core.Handler
-import kotlin.coroutines.experimental.suspendCoroutine
+import io.vertx.core.Vertx
+import io.vertx.kotlin.coroutines.awaitResult
+import kotlinx.coroutines.experimental.async
 
-/**
- * Converts Vert.x callbacks to Kotlin coroutines. Example:
- * Given an async API such as `mongoClient.find("books", query, { res -> ??? })` we can convert
- * the call to a coroutine and use it sequentially:
- *   val result = suspendAsync { mongoClient.find("books", query, it) }
- */
-inline suspend fun <T> suspendAsync(crossinline callback: (Handler<AsyncResult<T>>) -> Unit) = suspendCoroutine<T> { cont ->
-    callback(Handler { result: AsyncResult<T> ->
-        if (result.succeeded()) {
-            cont.resume(result.result())
-        } else {
-            cont.resumeWithException(result.cause())
+suspend fun <T> execBlocking(vx: Vertx, fn: () -> T): T = async {
+    val handler = Handler { future: Future<T> ->
+        try {
+            future.complete(fn())
+        } catch (t: Throwable) {
+            future.fail(t)
         }
-    })
-}
+    }
+    awaitResult<T> { vx.executeBlocking(handler, it) }
+}.await()

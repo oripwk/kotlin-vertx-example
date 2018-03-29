@@ -9,7 +9,7 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.core.json.Json
 import io.vertx.kotlin.core.json.array
 
-class UserController constructor(val userService: UserService) {
+class UserController(val userService: UserService) {
 
     suspend fun create(ctx: RoutingContext) {
         val user = ctx.bodyAsJson.mapTo(User::class.java)
