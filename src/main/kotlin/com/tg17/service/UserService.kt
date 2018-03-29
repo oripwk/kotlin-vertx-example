@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.createMissingTablesAndColumns
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class UserService(val vx: Vertx) {
+class UserService(private val vx: Vertx) {
     init {
         Database.connect(
                 url = "jdbc:mysql://127.0.0.1/kotlin_vertx",

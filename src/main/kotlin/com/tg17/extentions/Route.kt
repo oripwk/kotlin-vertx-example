@@ -6,7 +6,7 @@ import io.vertx.kotlin.coroutines.dispatcher
 import kotlinx.coroutines.experimental.launch
 
 object Route {
-    fun Route.coroutineHandler(fn: suspend (RoutingContext) -> Unit) = handler { ctx ->
+    fun Route.coroutineHandler(fn: suspend (RoutingContext) -> Unit): Route = handler { ctx ->
         launch(ctx.vertx().dispatcher()) {
             try {
                 fn(ctx)

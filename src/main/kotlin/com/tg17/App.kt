@@ -20,7 +20,7 @@ class App : CoroutineVerticle() {
         val router = Router.router(vertx)
         val userService = UserService(vertx)
         val albumClient = AlbumClient(ws)
-        val controller = UserController(userService, albumClient)
+        val controller = UserController(userService, albumClient, "https://eu-west-1.queue.amazonaws.com/750035664134/test")
         com.tg17.routes.Router(controller, router)
 
         awaitResult<HttpServer> {

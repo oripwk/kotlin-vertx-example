@@ -1,5 +1,9 @@
 package com.tg17.controllers
 
+import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
+import com.amazonaws.services.sqs.model.SendMessageRequest
+import com.amazonaws.services.sqs.model.SendMessageResult
+import com.tg17.awaitResult
 import com.tg17.client.AlbumClient
 import com.tg17.model.User
 import com.tg17.service.UserService
@@ -10,10 +14,18 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.core.json.Json
 import io.vertx.kotlin.core.json.array
 
-class UserController(val userService: UserService, val albumClient: AlbumClient) {
+class UserController(
+        private val userService: UserService,
+        private val albumClient: AlbumClient,
+        private val queueUrl: String
+) {
+
+    private val sqs = AmazonSQSAsyncClientBuilder.standard().build()
 
     suspend fun create(ctx: RoutingContext) {
-        val user = ctx.bodyAsJson.mapTo(User::class.java)
+        val userJson = ctx.bodyAsJson
+        val user = userJson.mapTo(User::class.java)
+        awaitResult<SendMessageRequest, SendMessageResult> { sqs.sendMessageAsync(queueUrl, userJson.encode(), it) }
         userService.create(user)
         ctx.response().end()
     }
