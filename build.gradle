@@ -18,10 +18,9 @@ dependencies {
     compile group: 'io.vertx', name: 'vertx-lang-kotlin-coroutines', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-web', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-config', version: '3.5.1'
-    compile group: 'io.vertx', name: 'vertx-jdbc-client', version: '3.5.1' // TODO remove
+    compile group: 'io.vertx', name: 'vertx-web-client', version: '3.5.1'
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.4.1'
     compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
-    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4' // TODO remove
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.21'
     compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.305'

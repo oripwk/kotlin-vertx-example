@@ -1,5 +1,6 @@
 package com.tg17.controllers
 
+import com.tg17.client.AlbumClient
 import com.tg17.model.User
 import com.tg17.service.UserService
 import io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE
@@ -9,7 +10,7 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.core.json.Json
 import io.vertx.kotlin.core.json.array
 
-class UserController(val userService: UserService) {
+class UserController(val userService: UserService, val albumClient: AlbumClient) {
 
     suspend fun create(ctx: RoutingContext) {
         val user = ctx.bodyAsJson.mapTo(User::class.java)
@@ -27,9 +28,11 @@ class UserController(val userService: UserService) {
     suspend fun getById(ctx: RoutingContext) {
         val id = ctx.request().getParam("id").toInt()
         val user = userService.getById(id)
+        val albumTitle = albumClient.getFirstAlbum(1).getString("title")
+        val userWithAlbumTitle = user.copy(albumTitle = albumTitle)
         ctx.response()
                 .putHeader(CONTENT_TYPE, APPLICATION_JSON)
-                .end(JsonObject.mapFrom(user).encode())
+                .end(JsonObject.mapFrom(userWithAlbumTitle).encode())
 
     }
 
