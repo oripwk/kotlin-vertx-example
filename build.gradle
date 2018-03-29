@@ -17,7 +17,7 @@ dependencies {
     compile group: 'io.vertx', name: 'vertx-lang-kotlin', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-lang-kotlin-coroutines', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-web', version: '3.5.1'
-    compile group: 'io.vertx', name: 'vertx-config', version: '3.5.1'
+    compile group: 'io.vertx', name: 'vertx-config-hocon', version: '3.5.1'
     compile group: 'io.vertx', name: 'vertx-web-client', version: '3.5.1'
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.4.1'
     compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'

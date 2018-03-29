@@ -4,17 +4,18 @@ import com.tg17.dal.Users
 import com.tg17.execBlocking
 import com.tg17.model.User
 import io.vertx.core.Vertx
+import io.vertx.core.json.JsonObject
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.createMissingTablesAndColumns
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class UserService(private val vx: Vertx) {
+class UserService(private val vx: Vertx, config: JsonObject) {
     init {
         Database.connect(
-                url = "jdbc:mysql://127.0.0.1/kotlin_vertx",
-                user = "root",
-                password = "password",
-                driver = "com.mysql.jdbc.Driver"
+                url = config.getString("url"),
+                user = config.getString("user"),
+                password = config.getString("password"),
+                driver = config.getString("driver")
         )
         transaction {
             createMissingTablesAndColumns(Users)
