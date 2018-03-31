@@ -1,12 +1,5 @@
 version: "3.4"
 services:
-  mysql:
-    image: mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: kotlin_vertx
-      MYSQL_ROOT_PASSWORD: password
   web:
     build: .
     ports:
@@ -17,3 +10,10 @@ services:
       MYSQL_HOST: mysql
       AWS_ACCESS_KEY_ID: ???
       AWS_SECRET_KEY: ???
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: kotlin_vertx
+      MYSQL_ROOT_PASSWORD: password

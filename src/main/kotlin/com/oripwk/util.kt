@@ -8,6 +8,7 @@ import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.kotlin.coroutines.awaitResult
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
 import java.lang.Exception
 
 suspend fun <T> execBlocking(vx: Vertx, fn: () -> T): T = async {
@@ -20,6 +21,19 @@ suspend fun <T> execBlocking(vx: Vertx, fn: () -> T): T = async {
     }
     awaitResult<T> { vx.executeBlocking(handler, it) }
 }.await()
+
+suspend fun <T> retry(times: Int, interval: Int, fn: () -> T?): T? {
+    return try {
+        fn()
+    } catch (t: Throwable) {
+        if (times == 0) {
+            throw t
+        }
+        delay(interval)
+        retry(times - 1, interval, fn)
+    }
+}
+
 
 suspend fun <REQ : AmazonWebServiceRequest, RES> awaitResult(block: (AsyncHandler<REQ, RES>) -> Unit): RES = awaitResult { it ->
 

@@ -3,30 +3,29 @@ package com.oripwk.service
 import com.oripwk.dal.Users
 import com.oripwk.execBlocking
 import com.oripwk.model.User
+import com.oripwk.retry
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.createMissingTablesAndColumns
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserService(private val vx: Vertx, config: JsonObject) {
     init {
-        for (i in 1..3) {
-            try {
-                Database.connect(
-                        url = config.getString("url"),
-                        user = config.getString("user"),
-                        password = config.getString("password"),
-                        driver = config.getString("driver")
-                )
-                break
-            } catch (e: Exception) {
-                Thread.sleep(3000)
-            }
-        }
+        Database.connect(
+                url = config.getString("url"),
+                user = config.getString("user"),
+                password = config.getString("password"),
+                driver = config.getString("driver")
+        )
 
-        transaction {
-            createMissingTablesAndColumns(Users)
+        launch {
+            retry(3, 3000) {
+                transaction {
+                    createMissingTablesAndColumns(Users)
+                }
+            }
         }
     }
 
