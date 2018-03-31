@@ -12,5 +12,5 @@ Configutation:
         AppenderRef:
           - ref: Console_Appender
       Logger:
-        - name: org.jetbrains.exposed
+        - name: Exposed # org.jetbrains.exposed
           level: error
