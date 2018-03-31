@@ -18,13 +18,13 @@ import mu.KLogging
 class UserController(
         private val userService: UserService,
         private val albumClient: AlbumClient,
-        private val config: JsonObject
+        config: JsonObject
 ) {
 
     companion object : KLogging()
 
     private val queueUrl = config.getString("url")
-    private val sqs = AmazonSQSAsyncClientBuilder.standard().build()
+    private val sqs = AmazonSQSAsyncClientBuilder.standard().withRegion("eu-west-1").build()
 
     suspend fun create(ctx: RoutingContext) {
         logger.info { "creating user" }

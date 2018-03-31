@@ -11,12 +11,20 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserService(private val vx: Vertx, config: JsonObject) {
     init {
-        Database.connect(
-                url = config.getString("url"),
-                user = config.getString("user"),
-                password = config.getString("password"),
-                driver = config.getString("driver")
-        )
+        for (i in 1..3) {
+            try {
+                Database.connect(
+                        url = config.getString("url"),
+                        user = config.getString("user"),
+                        password = config.getString("password"),
+                        driver = config.getString("driver")
+                )
+                break
+            } catch (e: Exception) {
+                Thread.sleep(3000)
+            }
+        }
+
         transaction {
             createMissingTablesAndColumns(Users)
         }
