@@ -26,6 +26,11 @@ dependencies {
     compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.305'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.4'
     compile group: 'io.github.microutils', name: 'kotlin-logging', version: '1.5.4'
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.2.31'
+    testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.5'
+    testCompile group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.1.0'
+    testCompile group: 'com.nhaarman', name: 'mockito-kotlin', version: '1.5.0'
+    testRuntime group: 'org.jetbrains.spek', name: 'spek-junit-platform-engine', version: '1.1.5'
 }
 
 mainClassName = 'io.vertx.core.Launcher'
@@ -39,6 +44,12 @@ compileKotlin {
 
 kotlin {
     experimental { coroutines 'enable' }
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek'
+    }
 }
 
 run {
