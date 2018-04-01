@@ -8,5 +8,6 @@ This is a skeleton web server stack for Kotlin with Vert.x. The stack includes:
 - Using Vert.x config API with HOCON
 - Logging with Log4j and YAML config
 - Sending a message to SQS
-
+- Using Spek for unit testing
+- Using Mockk for Kotlin mocking
 
