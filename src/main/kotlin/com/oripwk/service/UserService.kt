@@ -21,7 +21,7 @@ class UserService(private val vx: Vertx, config: JsonObject) {
         )
 
         launch {
-            retry(3, 3000) {
+            retry(times = 3, interval = 3000) {
                 transaction {
                     createMissingTablesAndColumns(Users)
                 }
